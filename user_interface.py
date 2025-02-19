@@ -13,9 +13,11 @@ def handle_user_input(query_handler):
         EXIT - для выхода\n: """).strip().lower()
 
         if user_choice == 'exit':
+            query_handler.close()
             break
 
         if user_choice == 'genres':
+
             genres = query_handler.get_all_category()
             if not genres:
                 print("Жанры не найдены.")
@@ -23,9 +25,10 @@ def handle_user_input(query_handler):
             display_results(genres)
             genre = input("Введите название жанра, выбрав из выше перечисленных: ").strip().capitalize()
             years = query_handler.get_all_year()
-            # years_list = [elem.get('release_year') for elem in years]
-            print("Доступные годы:", years)
+            for year in years:
+                print("Доступные года:\n", year.get('release_year'))
             year = int(input("Введите год выпуска фильмов, выбрав из выше перечисленных: "))
+
             if year < 1901 or year > 2155:
                 print("Пожалуйста, введите корректный год.")
                 continue

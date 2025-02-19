@@ -22,6 +22,6 @@ class DBConnector:
         return self._cursor
 
     def close(self):
-        if self._connection.open:
+        if self._connection in locals():
             self._cursor.close()
             self._connection.close()
