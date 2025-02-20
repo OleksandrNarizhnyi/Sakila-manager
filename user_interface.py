@@ -1,6 +1,5 @@
 from add_and_update_created_db import *
 
-from query_manager import *
 
 def handle_user_input(query_handler):
     create_tables()
@@ -48,10 +47,8 @@ def handle_user_input(query_handler):
             add_or_update_count_keywords(keyword)
             result_kw = query_handler.get_films_by_keyword(keyword)
             print(f"Результат поиска по ключевому слову: --{keyword}--\n")
-            [print(f"Название фильма: {row.get('title')} -- Описание фильма, {row.get('description')}") for row in result_kw]
-            # for result in result_kw:
-            #     print(result.get('title'), result.get('release_year'), result.get('description'))
-            # display_results(result_kw)
+            [print(f"Название фильма: {row.get('title')} -- Описание фильма, {row.get('description')}") for row in
+             result_kw]
 
         elif user_choice == 'searched':
             search_res_key = get_search_rating_keywords()
@@ -63,7 +60,6 @@ def handle_user_input(query_handler):
             print("Самые частые запросы по жанру и году: \n")
             for res in search_res_gen:
                 print(f"Жанр: {res[0]}, Год: {res[2]}, Количество вводов: {res[1]}")
-            # display_results(search_res_gen)
 
         else:
             print("Некорректный выбор. Пожалуйста, выберите один из предложенных вариантов.")
