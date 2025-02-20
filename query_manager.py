@@ -38,7 +38,7 @@ class QueryHandler(DBConnector):
         on f.film_id = f_c.film_id
         join category as c 
         on f_c.category_id = c.category_id
-        where c.name = %s or f.release_year = %s
+        where c.name = %s and f.release_year = %s
         limit 10
         """, (category, year))
         record = cursor.fetchall()
