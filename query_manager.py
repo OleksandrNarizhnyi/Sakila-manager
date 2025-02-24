@@ -41,6 +41,6 @@ class QueryHandler(DBConnector):
             print(f"Ошибка при поиске по ключевому слову: {e}")
             return []
 
-    def close(self):
-        self.get_cursor().close()
+    # def close(self):
+    #     self.get_cursor().close()
 
