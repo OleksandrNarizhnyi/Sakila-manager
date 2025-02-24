@@ -1,6 +1,6 @@
 from pymysql.err import OperationalError
 from db_connection import DBConnector
-
+from sql_queries import SakilaQueries
 class QueryHandler(DBConnector):
     def __init__(self, dbconfig):
         super().__init__(dbconfig)
@@ -8,7 +8,7 @@ class QueryHandler(DBConnector):
     def get_all_category(self):
         try:
             cursor = self.get_cursor()
-            cursor.execute("SELECT name FROM category")
+            cursor.execute(SakilaQueries.GET_ALL_CATEGORY)
             return cursor.fetchall()
         except OperationalError as e:
             print(f"Ошибка при получении категорий: {e}")
@@ -17,7 +17,7 @@ class QueryHandler(DBConnector):
     def get_all_year(self):
         try:
             cursor = self.get_cursor()
-            cursor.execute("SELECT DISTINCT release_year FROM film ORDER BY release_year")
+            cursor.execute(SakilaQueries.GET_ALL_YEAR)
             return cursor.fetchall()
         except OperationalError as e:
             print(f"Ошибка при получении годов: {e}")
@@ -26,13 +26,7 @@ class QueryHandler(DBConnector):
     def get_films_by_keyword(self, keyword: str):
         try:
             cursor = self.get_cursor()
-            cursor.execute("""
-            SELECT title, release_year, description 
-            from film
-            where title like  %s
-            or description like  %s
-            """,
-            (f"%{keyword}%", f"%{keyword}%"))
+            cursor.execute(SakilaQueries.FILMS_BY_KEYWORD,(f"%{keyword}%", f"%{keyword}%"))
             return cursor.fetchall()
         except OperationalError as e:
             print(f"Ошибка при поиске по ключевому слову: {e}")
@@ -41,16 +35,7 @@ class QueryHandler(DBConnector):
     def get_film_by_category_and_year(self, category: str, year: int):
         try:
             cursor = self.get_cursor()
-            cursor.execute("""
-            select title, description 
-            from film as f
-            join film_category as f_c 
-            on f.film_id = f_c.film_id
-            join category as c 
-            on f_c.category_id = c.category_id
-            where c.name = %s and f.release_year = %s
-            limit 10
-            """, (category, year))
+            cursor.execute(SakilaQueries.FILMS_BY_GENRE_AND_YEAR, (category, year))
             return cursor.fetchall()
         except OperationalError as e:
             print(f"Ошибка при поиске по ключевому слову: {e}")

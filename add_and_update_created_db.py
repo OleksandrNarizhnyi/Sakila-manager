@@ -1,5 +1,5 @@
 import sqlite3
-
+from sql_queries import SQLiteQueries
 
 def create_tables():
     with sqlite3.connect('count_keywords.db') as connection:
@@ -24,7 +24,6 @@ def create_tables():
             )
         ''')
 
-
 def add_or_update_count_keywords(keyword):
     try:
         with sqlite3.connect('count_keywords.db') as connection:
@@ -45,7 +44,6 @@ def add_or_update_count_keywords(keyword):
             connection.commit()
     except sqlite3.Error as e:
         print(f"Ошибка при работе с базой данных: {e}")
-
 
 def add_or_update_count_genre_year(genre, year):
     try:
@@ -68,29 +66,16 @@ def add_or_update_count_genre_year(genre, year):
     except sqlite3.Error as e:
         print(f"Ошибка при работе с базой данных: {e}")
 
-
 def get_search_rating_keywords():
     with sqlite3.connect('count_keywords.db') as connection:
         cursor = connection.cursor()
-        cursor.execute(
-            """
-                    SELECT keyword, count 
-                    FROM count_keywords
-                    ORDER BY count desc limit 3
-                """
-        )
+        cursor.execute(SQLiteQueries.RATING_KEYWORDS)
         record = cursor.fetchall()
     return record
 
 def get_search_rating_genres():
     with sqlite3.connect('count_genre_year.db') as connection:
         cursor = connection.cursor()
-        cursor.execute(
-            """
-                    SELECT genre, count, year 
-                    FROM count_genre_year
-                    ORDER BY count desc limit 3
-                """
-        )
+        cursor.execute(SQLiteQueries.RATING_GENRES)
         record = cursor.fetchall()
     return record
