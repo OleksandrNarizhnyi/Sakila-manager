@@ -31,7 +31,7 @@ def handle_user_input(query_handler):
                     print(year.get('release_year'))
                 try:
                     year = int(input("\nВведите год выпуска фильмов, выбрав из выше перечисленных: "))
-                    if year < 1901 or year > 2155:
+                    if year < 1980 or year > 2023:
                         print("Пожалуйста, введите корректный год.")
                         continue
                 except ValueError:
@@ -61,7 +61,6 @@ def handle_user_input(query_handler):
                 print("ТОП-3 запроса по ключевому полю: \n")
                 for res in search_res_key:
                     print(f"Ключевое слово: {res[0]} -- Количество вводов: {res[1]}")
-                # display_results(search_res_key)
                 search_res_gen = get_search_rating_genres()
                 print("ТОП-3 запроса по жанру и году: \n")
                 for res in search_res_gen:
