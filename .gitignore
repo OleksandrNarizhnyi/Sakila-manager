@@ -1,5 +1,4 @@
-/.env
-/.venv/
+.env
+.venv
 __pycache__
 .idea
-db_config.py

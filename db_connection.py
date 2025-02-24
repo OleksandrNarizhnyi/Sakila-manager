@@ -1,5 +1,6 @@
 import pymysql
 
+
 class DBConnector:
 
     def __init__(self, dbconfig: dict):
@@ -25,3 +26,4 @@ class DBConnector:
         if self._connection in locals():
             self._cursor.close()
             self._connection.close()
+
