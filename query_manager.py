@@ -1,6 +1,7 @@
 from pymysql.err import OperationalError
 from db_connection import DBConnector
 from sql_queries import SakilaQueries
+
 class QueryHandler(DBConnector):
     def __init__(self, dbconfig):
         super().__init__(dbconfig)
