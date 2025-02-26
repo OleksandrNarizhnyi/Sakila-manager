@@ -43,7 +43,7 @@ def handle_user_input(query_handler):
                     print(f"Результат поиска по жанру: --{genre}-- и году выпуска: --{year}--\n")
                     [print(row.get('title', 'Без названия'), row.get('description', 'Нет описания'), sep=' -- ') for row in result_gen]
                 else:
-                    print("Введены некорректные данные")
+                    print(f"Введены некорректные данные. Фильмы по жанру: --{genre}-- и году выпуска: --{year}-- не найдены\n")
 
             elif user_choice == 'key':
                 keyword = input("Введите слово для поиска: ").strip()
