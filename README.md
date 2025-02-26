@@ -1,7 +1,7 @@
 ## Description
 
 **Sakila-manager** is a console application for searching movies by genre, release year and keywords.
-The project includes backend on Flask, database (MySQL/SQLite).
+The project includes work with MySQL and SQLite databases.
 Created as a learning project to master basic Python programming (functional programming and OOP).
 
 ## Functionality
@@ -9,7 +9,6 @@ Created as a learning project to master basic Python programming (functional pro
 - Search movies by genre and year.
 - Search for movies by keywords in title or description.
 - Statistics of popular queries (by genre and keywords).
-- Automated UI and API tests.
 - MySQL and SQLite support for data storage.
 
 ## Requirements
@@ -22,7 +21,7 @@ Dependency list is listed in [`requirements.txt`](#installation).
 ## Описание
 
 **Sakila-manager** — это консольное-приложение для поиска фильмов по жанру, году выпуска и ключевым словам.
-Проект включает backend на Flask, базу данных (MySQL/SQLite).
+Проект включает работу с базами данных MySQL и SQLite.Проект включает работу с базами данных MySQL и SQLite.
 Создан как учебный проект для освоения базового программирования на Python(функциональное программирование и ООП).
 
 ## Функциональность
@@ -30,7 +29,6 @@ Dependency list is listed in [`requirements.txt`](#installation).
 - Поиск фильмов по жанру и году.
 - Поиск фильмов по ключевым словам в названии или описании.
 - Статистика популярных запросов (по жанрам и ключевым словам).
-- Автоматизированные тесты UI и API.
 - Поддержка MySQL и SQLite для хранения данных.
 
 ## Требования
