@@ -5,8 +5,8 @@ def handle_user_input(query_handler):
     create_tables()
 
     while True:
-        user_choice = input("Введите:\n"
-                    "GENRES для поиска по жанрам\n"
+        user_choice = input("\nВведите:\n"
+                    "GENRES - для поиска по жанрам\n"
                     "KEY - для поиска по ключевому слову\n"
                     "SEARCHED - для получения самых частых запросов\n"
                     "EXIT - для выхода\n: ").strip().lower()
@@ -21,17 +21,17 @@ def handle_user_input(query_handler):
                 if not genres:
                     print("Жанры не найдены.")
                     continue
-                print("Доступные жанры:\n")
+                print("\nДоступные жанры:\n")
                 for category in genres:
                     print(category.get('name'))
                 genre = input("\nВведите название жанра, выбрав из выше перечисленных: ").strip().capitalize()
                 years = query_handler.get_all_year()
-                print("Доступные года:\n")
+                print("\nДоступные года:\n")
                 for year in years:
                     print(year.get('release_year'))
                 try:
                     year = int(input("\nВведите год выпуска фильмов, выбрав из выше перечисленных: "))
-                    if year < 1980 or year > 2023:
+                    if year < 1980 or year > 2025:
                         print("Пожалуйста, введите корректный год.")
                         continue
                 except ValueError:
@@ -40,29 +40,29 @@ def handle_user_input(query_handler):
                 add_or_update_count_genre_year(genre, year)
                 result_gen = query_handler.get_film_by_category_and_year(genre, year)
                 if result_gen:
-                    print(f"Результат поиска по жанру: --{genre}-- и году выпуска: --{year}--\n")
+                    print(f"\nРезультат поиска по жанру: --{genre}-- и году выпуска: --{year}--\n")
                     [print(row.get('title', 'Без названия'), row.get('description', 'Нет описания'), sep=' -- ') for row in result_gen]
                 else:
-                    print(f"Введены некорректные данные. Фильмы по жанру: --{genre}-- и году выпуска: --{year}-- не найдены\n")
+                    print(f"\nВведены некорректные данные. Фильмы по жанру: --{genre}-- и году выпуска: --{year}-- не найдены\n")
 
             elif user_choice == 'key':
                 keyword = input("Введите слово для поиска: ").strip()
                 add_or_update_count_keywords(keyword)
                 result_kw = query_handler.get_films_by_keyword(keyword)
                 if not result_kw:
-                    print(f"По ключевому слову '{keyword}' ничего не найдено.")
+                    print(f"\nПо ключевому слову '{keyword}' ничего не найдено.")
                     continue
-                print(f"Результат поиска по ключевому слову: --{keyword}--\n")
+                print(f"\nРезультат поиска по ключевому слову: --{keyword}--\n")
                 [print(f"Название фильма: {row.get('title')} -- Описание фильма: {row.get('description')}") for row in
                  result_kw]
 
             elif user_choice == 'searched':
                 search_res_key = get_search_rating_keywords()
-                print("ТОП-3 запроса по ключевому полю: \n")
+                print("\nТОП-3 запроса по ключевому полю: \n")
                 for res in search_res_key:
                     print(f"Ключевое слово: {res[0]} -- Количество вводов: {res[1]}")
                 search_res_gen = get_search_rating_genres()
-                print("ТОП-3 запроса по жанру и году: \n")
+                print("\nТОП-3 запроса по жанру и году: \n")
                 for res in search_res_gen:
                     print(f"Жанр: {res[0]}, Год: {res[2]}, Количество вводов: {res[1]}")
 
