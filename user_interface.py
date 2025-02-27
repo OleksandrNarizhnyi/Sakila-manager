@@ -19,7 +19,7 @@ def handle_user_input(query_handler):
             if user_choice == 'genres':
                 genres = query_handler.get_all_category()
                 if not genres:
-                    print("Жанры не найдены.")
+                    print("\nЖанры не найдены.")
                     continue
                 print("\nДоступные жанры:\n")
                 for category in genres:
@@ -32,10 +32,10 @@ def handle_user_input(query_handler):
                 try:
                     year = int(input("\nВведите год выпуска фильмов, выбрав из выше перечисленных: "))
                     if year < 1980 or year > 2025:
-                        print("Пожалуйста, введите корректный год.")
+                        print("\nПожалуйста, введите корректный год.")
                         continue
                 except ValueError:
-                    print("Пожалуйста, введите число.")
+                    print("\nПожалуйста, введите число.")
                     continue
                 add_or_update_count_genre_year(genre, year)
                 result_gen = query_handler.get_film_by_category_and_year(genre, year)
@@ -46,7 +46,7 @@ def handle_user_input(query_handler):
                     print(f"\nВведены некорректные данные. Фильмы по жанру: --{genre}-- и году выпуска: --{year}-- не найдены\n")
 
             elif user_choice == 'key':
-                keyword = input("Введите слово для поиска: ").strip()
+                keyword = input("\nВведите слово для поиска: ").strip()
                 add_or_update_count_keywords(keyword)
                 result_kw = query_handler.get_films_by_keyword(keyword)
                 if not result_kw:
@@ -67,7 +67,7 @@ def handle_user_input(query_handler):
                     print(f"Жанр: {res[0]}, Год: {res[2]}, Количество вводов: {res[1]}")
 
             else:
-                print("Некорректный выбор. Пожалуйста, выберите один из предложенных вариантов.")
+                print("\nНекорректный выбор. Пожалуйста, выберите один из предложенных вариантов.")
         except Exception as e:
-            print(f"Произошла ошибка: {e}")
+            print(f"\nПроизошла ошибка: {e}")
             continue
